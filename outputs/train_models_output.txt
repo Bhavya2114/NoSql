@@ -1,6 +1,6 @@
-﻿
+
 ============================================================
-1. Load prepared data (from MongoDB via Phase 3)
+1. Load prepared data (from MongoDB via data_preprocessing.py)
 ============================================================
 Training patients: 242 | Test patients: 61
 
@@ -37,7 +37,7 @@ Quick check, share of test patients predicted correctly:
 Saved 61 prediction documents to heart_disease_db.predictions
 
 Example document:
-{'patient_id': 'P220', 'actual': 'No Disease', 'logistic_regression': {'prediction': 'No Disease', 'probability': 0.229}, 'random_forest': {'prediction': 'No Disease', 'probability': 0.3}, 'max_heart_rate': {'actual': 182, 'predicted': 155.4}, 'created_at': datetime.datetime(2026, 10, 29, 12, 49, 55, 456000)}
+{'patient_id': 'P220', 'actual': 'No Disease', 'logistic_regression': {'prediction': 'No Disease', 'probability': 0.229}, 'random_forest': {'prediction': 'No Disease', 'probability': 0.3}, 'max_heart_rate': {'actual': 182, 'predicted': 155.4}, 'created_at': datetime.datetime(2026, 10, 29, 13, 29, 12, 615000)}
 
 Test patients where the two models disagree: 3
 
@@ -46,4 +46,4 @@ Test patients where the two models disagree: 3
 ============================================================
 Saved models/heart_models.pkl
 
-Phase 4 complete.
+Done.

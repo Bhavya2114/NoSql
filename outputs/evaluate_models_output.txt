@@ -1,4 +1,4 @@
-﻿
+
 ============================================================
 1. Read predictions from MongoDB
 ============================================================
@@ -43,4 +43,4 @@ Saved graphs in graphs/:
    feature_importance.png
    disease_by_age_gender.png
 
-Phase 5 complete.
+Done.

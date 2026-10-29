@@ -1,15 +1,15 @@
 """
-Phase 5: Evaluation and graphs
+Model evaluation and graphs
 Heart Disease Risk Prediction (UCI Cleveland dataset, 303 patients)
 
 Steps:
-  1. Read the test predictions from MongoDB (saved in Phase 4)
+  1. Read the test predictions from MongoDB (saved by train_models.py)
   2. Classification metrics: Accuracy, Precision, Recall, F1
   3. Regression metrics: R² and MAE
   4. Save all metrics to MongoDB (model_metrics collection)
   5. Draw the graphs into the graphs/ folder
 
-Run:  python phase5_evaluation.py   (after phase4_models.py)
+Run:  python evaluate_models.py   (after train_models.py)
 """
 
 import os
@@ -194,4 +194,4 @@ print("Saved graphs in graphs/:")
 for s in saved:
     print("  ", s)
 
-print("\nPhase 5 complete.")
+print("\nDone.")

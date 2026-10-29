@@ -1,5 +1,5 @@
 """
-Phase 2: MongoDB / PyMongo implementation
+MongoDB / PyMongo operations
 Heart Disease Risk Prediction (UCI Cleveland dataset, 303 patients)
 
 What this file shows:
@@ -11,7 +11,7 @@ What this file shows:
   6. INDEX   - create indexes and prove MongoDB uses them
   7. AGGREGATION - group-by style reports on the patients
 
-Run:  python phase2_mongodb.py
+Run:  python mongodb_operations.py
 """
 
 import pandas as pd
@@ -95,7 +95,7 @@ print("\nc) Patients with heart disease (num > 0):",
 print("d) Women who get chest pain during exercise:",
       patients.count_documents({"sex": 0, "exang": 1}))
 
-# e) Rows with missing values (cleaned later in Phase 3)
+# e) Rows with missing values (cleaned later in data_preprocessing.py)
 missing = {"$or": [{"ca": None}, {"thal": None}]}
 print("e) Patients with a missing ca or thal value:", patients.count_documents(missing))
 for p in patients.find(missing, {"_id": 0, "patient_id": 1, "ca": 1, "thal": 1}):
@@ -212,4 +212,4 @@ for row in patients.aggregate([
     pct = round(row["with_disease"] / row["total"] * 100, 1)
     print(f"   {pain_names[int(row['_id'])]:>16}: {row['total']:3d} patients, {pct}% with disease")
 
-print("\nPhase 2 complete. Data is stored in heart_disease_db.patients")
+print("\nDone. Data is stored in heart_disease_db.patients")

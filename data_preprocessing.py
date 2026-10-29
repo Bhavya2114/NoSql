@@ -1,5 +1,5 @@
 """
-Phase 3: Data preprocessing
+Data preprocessing
 Heart Disease Risk Prediction (UCI Cleveland dataset, 303 patients)
 
 Steps:
@@ -11,8 +11,8 @@ Steps:
   6. Scale the numbers (StandardScaler)
   7. Save the cleaned data back to MongoDB (patients_clean)
 
-Run:  python phase3_preprocessing.py
-Phase 4 imports prepare_data() from this file.
+Run:  python data_preprocessing.py
+train_models.py imports prepare_data() from this file.
 """
 
 import pandas as pd
@@ -50,7 +50,7 @@ def clean(df):
 
 
 def prepare_data():
-    """Run all steps and return everything the models in Phase 4 need."""
+    """Run all steps and return everything the models need."""
     raw = load_from_mongodb()
     df = clean(raw)
 
@@ -138,4 +138,4 @@ if __name__ == "__main__":
     clean_col.insert_many(df.to_dict("records"))
     print("Saved", clean_col.count_documents({}), "cleaned patients to heart_disease_db.patients_clean")
 
-    print("\nPhase 3 complete.")
+    print("\nDone.")

@@ -1,4 +1,4 @@
-﻿
+
 ============================================================
 1. Connect to MongoDB
 ============================================================
@@ -87,4 +87,4 @@ e) Disease rate by chest pain type:
    Non-anginal pain:  86 patients, 20.9% with disease
         No symptoms: 144 patients, 72.9% with disease
 
-Phase 2 complete. Data is stored in heart_disease_db.patients
+Done. Data is stored in heart_disease_db.patients

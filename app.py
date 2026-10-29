@@ -1,5 +1,5 @@
 """
-Phase 6: Streamlit app
+Streamlit web app
 Heart Disease Risk Prediction (UCI Cleveland dataset, 303 patients)
 
 Pages:
@@ -8,7 +8,7 @@ Pages:
   2. Dashboard - model metrics, dataset numbers from MongoDB, graphs,
                  and the history of predictions made in the app
 
-Run:  streamlit run app.py   (after phase4_models.py and phase5_evaluation.py)
+Run:  streamlit run app.py   (after train_models.py and evaluate_models.py)
 """
 
 import os
@@ -41,7 +41,7 @@ db = get_db()
 
 def make_input_row(values, columns):
     """Turn the form values into the same columns the models were trained on.
-    The category answers become 0/1 columns, the same one-hot encoding as Phase 3."""
+    The category answers become 0/1 columns, the same one-hot encoding as data_preprocessing.py."""
     row = {col: 0 for col in columns}
     for name in ["age", "sex", "trestbps", "chol", "fbs", "thalach", "exang", "oldpeak", "ca"]:
         if name in row:
@@ -155,7 +155,7 @@ else:
     d3.metric("Without heart disease", total - sick)
     d4.metric("Predictions made in app", made)
 
-    # Model results saved in Phase 5
+    # Model results saved by evaluate_models.py
     st.subheader("Model results (61 test patients)")
     metrics = list(db["model_metrics"].find({}, {"_id": 0}))
     cls = pd.DataFrame([m for m in metrics if "accuracy" in m]).set_index("model")
@@ -176,7 +176,7 @@ else:
                           "% with disease": round(r["sick"] / r["total"] * 100, 1)} for r in rows])
     st.bar_chart(rate.set_index("Chest pain type"))
 
-    # Graphs from Phase 5
+    # Graphs drawn by evaluate_models.py
     st.subheader("Graphs")
     graphs = ["model_comparison.png", "confusion_matrices.png", "feature_importance.png",
               "heart_rate_actual_vs_predicted.png", "disease_by_age_gender.png"]

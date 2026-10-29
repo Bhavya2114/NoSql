@@ -1,5 +1,5 @@
 """
-Phase 4: Model implementation
+Model training
 Heart Disease Risk Prediction (UCI Cleveland dataset, 303 patients)
 
 Models:
@@ -8,14 +8,14 @@ Models:
   3. Linear Regression   -> predict the maximum heart rate (thalach)
 
 Steps:
-  1. Get the cleaned, split and scaled data from Phase 3
+  1. Get the cleaned, split and scaled data from data_preprocessing.py
   2. Train the three models on the training patients
   3. Predict for the test patients
   4. Save the predictions to MongoDB (predictions collection)
-  5. Save the trained models to disk for the Streamlit app (Phase 6)
+  5. Save the trained models to disk for the Streamlit app
 
-Run:  python phase4_models.py
-Full evaluation (metrics and graphs) is done in Phase 5.
+Run:  python train_models.py
+Full evaluation (metrics and graphs) is done in evaluate_models.py.
 """
 
 import os
@@ -27,7 +27,7 @@ from pymongo import MongoClient
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.linear_model import LinearRegression, LogisticRegression
 
-from phase3_preprocessing import prepare_data
+from data_preprocessing import prepare_data
 
 
 def title(text):
@@ -37,9 +37,9 @@ def title(text):
 
 
 # ---------------------------------------------------------------
-# 1. Data from Phase 3
+# 1. Data from data_preprocessing.py
 # ---------------------------------------------------------------
-title("1. Load prepared data (from MongoDB via Phase 3)")
+title("1. Load prepared data (from MongoDB via data_preprocessing.py)")
 data = prepare_data()
 print("Training patients:", len(data["X_cls_train"]), "| Test patients:", len(data["X_cls_test"]))
 
@@ -92,7 +92,7 @@ results = pd.DataFrame({
 })
 print(results.head(10).to_string(index=False))
 
-# Quick check only (full metrics in Phase 5)
+# Quick check only (full metrics in evaluate_models.py)
 print("\nQuick check, share of test patients predicted correctly:")
 print("  Logistic Regression:", round((results.logistic_pred == results.actual_target).mean() * 100, 1), "%")
 print("  Random Forest:      ", round((results.forest_pred == results.actual_target).mean() * 100, 1), "%")
@@ -150,4 +150,4 @@ joblib.dump({
 }, "models/heart_models.pkl")
 print("Saved models/heart_models.pkl")
 
-print("\nPhase 4 complete.")
+print("\nDone.")

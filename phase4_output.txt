@@ -1,0 +1,49 @@
+﻿
+============================================================
+1. Load prepared data (from MongoDB via Phase 3)
+============================================================
+Training patients: 242 | Test patients: 61
+
+============================================================
+2. Train the models
+============================================================
+Logistic Regression trained
+Random Forest trained (100 trees)
+Linear Regression trained
+
+============================================================
+3. Predictions on the 61 test patients
+============================================================
+patient_id  actual_target  logistic_pred  logistic_prob  forest_pred  forest_prob  actual_thalach  predicted_thalach
+      P220              0              0          0.229            0         0.30             182              155.4
+      P272              0              1          0.547            1         0.59             138              145.6
+      P090              0              0          0.019            0         0.02             149              166.2
+      P102              0              0          0.032            0         0.07             174              181.9
+      P068              0              0          0.322            0         0.36             165              162.0
+      P245              0              0          0.012            0         0.17              96              159.6
+      P186              0              0          0.161            0         0.35             179              157.9
+      P234              0              0          0.226            0         0.27             121              144.3
+      P169              1              1          0.758            1         0.73             156              162.5
+      P198              0              0          0.368            0         0.18             152              145.2
+
+Quick check, share of test patients predicted correctly:
+  Logistic Regression: 82.0 %
+  Random Forest:       86.9 %
+  Linear Regression average error: 16.2 beats per minute
+
+============================================================
+4. Save predictions to MongoDB
+============================================================
+Saved 61 prediction documents to heart_disease_db.predictions
+
+Example document:
+{'patient_id': 'P220', 'actual': 'No Disease', 'logistic_regression': {'prediction': 'No Disease', 'probability': 0.229}, 'random_forest': {'prediction': 'No Disease', 'probability': 0.3}, 'max_heart_rate': {'actual': 182, 'predicted': 155.4}, 'created_at': datetime.datetime(2026, 10, 29, 12, 49, 55, 456000)}
+
+Test patients where the two models disagree: 3
+
+============================================================
+5. Save trained models
+============================================================
+Saved models/heart_models.pkl
+
+Phase 4 complete.

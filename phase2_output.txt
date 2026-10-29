@@ -1,0 +1,90 @@
+﻿
+============================================================
+1. Connect to MongoDB
+============================================================
+Connected. MongoDB version: 8.3.7
+Database: heart_disease_db | Collection: patients
+
+============================================================
+2. CREATE - insert all patients from the CSV
+============================================================
+Inserted 303 patients
+
+One document looks like this:
+{'patient_id': 'P001', 'age': 63, 'sex': 1, 'cp': 1, 'trestbps': 145, 'chol': 233, 'fbs': 1, 'restecg': 2, 'thalach': 150, 'exang': 0, 'oldpeak': 2.3, 'slope': 3, 'ca': 0, 'thal': 6, 'num': 0}
+
+Inserted test patient P999. Total now: 304
+
+============================================================
+3. READ - queries
+============================================================
+a) Age > 60 AND cholesterol > 300: 17 patients
+   {'patient_id': 'P033', 'age': 64, 'chol': 335}
+   {'patient_id': 'P043', 'age': 71, 'chol': 302}
+   {'patient_id': 'P045', 'age': 61, 'chol': 330}
+   {'patient_id': 'P049', 'age': 65, 'chol': 417}
+   {'patient_id': 'P076', 'age': 65, 'chol': 360}
+
+b) Top 5 highest cholesterol:
+   {'patient_id': 'P153', 'age': 67, 'chol': 564}
+   {'patient_id': 'P049', 'age': 65, 'chol': 417}
+   {'patient_id': 'P182', 'age': 56, 'chol': 409}
+   {'patient_id': 'P122', 'age': 63, 'chol': 407}
+   {'patient_id': 'P174', 'age': 62, 'chol': 394}
+
+c) Patients with heart disease (num > 0): 139
+d) Women who get chest pain during exercise: 22
+e) Patients with a missing ca or thal value: 6
+   {'patient_id': 'P088', 'ca': 0, 'thal': None}
+   {'patient_id': 'P167', 'ca': None, 'thal': 3}
+   {'patient_id': 'P193', 'ca': None, 'thal': 7}
+   {'patient_id': 'P267', 'ca': 0, 'thal': None}
+   {'patient_id': 'P288', 'ca': None, 'thal': 7}
+   {'patient_id': 'P303', 'ca': None, 'thal': 3}
+
+============================================================
+4. UPDATE
+============================================================
+update_one -> P999 cholesterol is now 210
+update_many -> labelled 165 as 'No Disease' and 139 as 'Disease'
+
+============================================================
+5. DELETE
+============================================================
+delete_one -> removed 1 test patient. Total now: 303
+
+============================================================
+6. INDEXES
+============================================================
+Indexes: ['_id_', 'patient_id_1', 'age_1']
+Query on age uses stage: IXSCAN (IXSCAN = index used)
+
+============================================================
+7. AGGREGATIONS
+============================================================
+a) Patients by diagnosis:
+   {'_id': 'No Disease', 'count': 164}
+   {'_id': 'Disease', 'count': 139}
+
+b) Average values by diagnosis:
+   {'_id': 'Disease', 'avg_age': 56.6, 'avg_cholesterol': 251.5, 'avg_blood_pressure': 134.6, 'avg_max_heart_rate': 139.3}
+   {'_id': 'No Disease', 'avg_age': 52.6, 'avg_cholesterol': 242.6, 'avg_blood_pressure': 129.2, 'avg_max_heart_rate': 158.4}
+
+c) Disease rate by gender:
+   {'_id': 'Male', 'total': 206, 'with_disease': 114, 'disease_percent': 55.3}
+   {'_id': 'Female', 'total': 97, 'with_disease': 25, 'disease_percent': 25.8}
+
+d) Disease rate by age group:
+    below 40:  15 patients, 26.7% with disease
+       40-49:  72 patients, 30.6% with disease
+       50-59: 125 patients, 48.0% with disease
+       60-69:  81 patients, 60.5% with disease
+         70+:  10 patients, 40.0% with disease
+
+e) Disease rate by chest pain type:
+     Typical angina:  23 patients, 30.4% with disease
+    Atypical angina:  50 patients, 18.0% with disease
+   Non-anginal pain:  86 patients, 20.9% with disease
+        No symptoms: 144 patients, 72.9% with disease
+
+Phase 2 complete. Data is stored in heart_disease_db.patients

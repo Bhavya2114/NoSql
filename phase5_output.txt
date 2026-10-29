@@ -1,0 +1,46 @@
+﻿
+============================================================
+1. Read predictions from MongoDB
+============================================================
+Loaded 61 test patients from heart_disease_db.predictions
+
+============================================================
+2. Classification metrics (disease yes/no)
+============================================================
+Accuracy  = share of all patients predicted correctly
+Precision = of patients we said have disease, how many really do
+Recall    = of patients who really have disease, how many we caught
+F1        = balance of precision and recall
+
+                     accuracy  precision  recall     f1
+Logistic Regression     0.820      0.793   0.821  0.807
+Random Forest           0.869      0.833   0.893  0.862
+
+Logistic Regression: 23 sick caught, 27 healthy correct, 6 false alarms, 5 sick patients missed
+
+Random Forest: 25 sick caught, 28 healthy correct, 5 false alarms, 3 sick patients missed
+
+============================================================
+3. Regression metrics (max heart rate)
+============================================================
+R²  = 0.22  (1.0 = perfect, 0 = no better than guessing the average)
+MAE = 16.16 beats per minute (average size of the error)
+
+============================================================
+4. Save metrics to MongoDB
+============================================================
+Saved 3 documents to heart_disease_db.model_metrics
+Best classification model (query sorted by accuracy): Random Forest
+
+============================================================
+5. Graphs
+============================================================
+Top 5 most important inputs: ['Thal: reversible defect', 'Max heart rate', 'Blocked vessels', 'Chest pain: none', 'ST depression']
+Saved graphs in graphs/:
+   confusion_matrices.png
+   model_comparison.png
+   heart_rate_actual_vs_predicted.png
+   feature_importance.png
+   disease_by_age_gender.png
+
+Phase 5 complete.
